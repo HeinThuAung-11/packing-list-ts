@@ -42,3 +42,9 @@ second.packed = true;
 export const getInitialItems = (): Item[] => {
   return items;
 };
+
+export const deleteItem = (items: Readonly<Item[]>, id: string) => {
+  return items.filter(item => {
+    return item.id !== id
+  })
+}
