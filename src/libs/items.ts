@@ -48,3 +48,15 @@ export const deleteItem = (items: Readonly<Item[]>, id: string) => {
     return item.id !== id
   })
 }
+
+export const updateItem = (items: Item[], id: string, edit: Partial<Item>) => {
+  return items.map(item => {
+    if (item.id === id) return { ...item, ...edit }
+    return item
+  })
+}
+export const filterItem = (items: Readonly<Item[]>, packed: Readonly<Partial<Item>>) => {
+  return items.filter(item => {
+    return item.packed === packed.packed
+  })
+}

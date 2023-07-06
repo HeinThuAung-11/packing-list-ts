@@ -1,5 +1,3 @@
-import { useContext } from "react"
-import { ItemContext } from "../context"
 type HeaderProp = {
   items: Item[]
 }

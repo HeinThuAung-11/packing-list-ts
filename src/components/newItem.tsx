@@ -12,8 +12,7 @@ export const NewItem = ({ addItem }: NewItemProps) => {
   }}>
     <label htmlFor="name">New Item Name</label>
     <input type="text" name="name" id="name" value={newItem}
-      onChange={(e) => setNewItem(e.target.value
-      )} />
+      onChange={(e) => setNewItem(e.target.value)} />
 
   </form>)
 }
