@@ -3,5 +3,5 @@ type markProp = {
 }
 export const Markasunpacked = ({ customClick }: markProp) => {
   return <button onClick={customClick}
-    className="border-2 border-purple-700">Mark All As Unpacked.</button>
+    className="border-2 border-purple-700 transform active:scale-y-75 transition-transform ">Mark All As Unpacked</button>
 }

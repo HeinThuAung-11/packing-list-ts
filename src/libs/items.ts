@@ -55,8 +55,16 @@ export const updateItem = (items: Item[], id: string, edit: Partial<Item>) => {
     return item
   })
 }
-export const filterItem = (items: Readonly<Item[]>, packed: Readonly<Partial<Item>>) => {
+export const filterItem = (items: Readonly<Item[]>, properties: Readonly<Partial<Item>>) => {
   return items.filter(item => {
-    return item.packed === packed.packed
+    for (const [filterKey, filterValue] of Object.entries(properties)) {
+      if (filterKey === 'packed' && typeof filterValue === 'boolean') {
+        return item.packed === properties.packed
+      }
+      if (filterKey === 'name' && typeof filterValue === 'string') {
+        return item.name.toLowerCase().startsWith(filterValue.toLowerCase())
+      }
+    }
+    return item
   })
 }
