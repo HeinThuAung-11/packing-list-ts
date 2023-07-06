@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useState } from "react";
-import { createItem, filterItem, getInitialItems, updateItem } from "./libs/items";
+import { createItem, deleteItem, filterItem, getInitialItems, updateItem } from "./libs/items";
 
 type ItemState = {
   add: (name: string) => void,
@@ -7,6 +7,8 @@ type ItemState = {
   packedItem: Item[];
   unpackedItem: Item[];
   update: (id: string, edit: Partial<Item>) => void;
+  remove: (id: string) => void;
+  markallasunpacked: () => void;
 }
 export const ItemContext = createContext({} as ItemState)
 
@@ -18,18 +20,24 @@ const ItemProvide = ({ children }: PropsWithChildren) => {
     setItems([...items, item])
   }
   const update = (id: string, edit: Partial<Item>) => {
-    console.log('wrong', id, edit)
-    const item = updateItem(items, id, edit)
-    setItems(item)
+    setItems(updateItem(items, id, edit))
+  }
+  const remove = (id: string) => {
+    setItems(deleteItem(items, id))
   }
   const packedItem = filterItem(items, { packed: true })
   const unpackedItem = filterItem(items, { packed: false })
+  const markallasunpacked = () => {
+    setItems(items.map((item) => ({ ...item, packed: false })))
+  }
   const value = {
     add,
     items,
     packedItem,
     unpackedItem,
-    update
+    update,
+    remove,
+    markallasunpacked
   }
   return <ItemContext.Provider value={value}>{children} </ItemContext.Provider>
 }
